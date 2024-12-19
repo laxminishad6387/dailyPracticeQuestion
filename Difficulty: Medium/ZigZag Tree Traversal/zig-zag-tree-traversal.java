@@ -125,35 +125,33 @@ System.out.println("~");
 
 class GFG
 {
+    //Function to store the zig zag order traversal of tree in a list.
     ArrayList<Integer> result=new ArrayList<>();
 	ArrayList<Integer> zigZagTraversal(Node root)
 	{
-	    boolean flag=true;
-	    Deque<Node> dq=new ArrayDeque<>();
-	    if(root==null)
-	      return result;
-	      dq.add(root);
-	      while(!dq.isEmpty())
-	      {
-	         int level=dq.size();
-	         ArrayList<Integer> ans=new ArrayList<>();
-	         for(int i=0; i<level; i++)
-	         {
-	             Node ele=dq.pollFirst();
-	             ans.add(ele.data);
-	             if(ele.left!=null)
-	               dq.addLast(ele.left);
-	               if(ele.right!=null)
-	               dq.addLast(ele.right);
-	               
-	         }
-	         if(!flag)
-	         {
-	             Collections.reverse(ans);
-	         }
-	         result.addAll(ans);
-	         flag=!flag;
-	      }
-	      return result;
+	   if(root==null)
+	   return result;
+	   Queue<Node> q=new LinkedList<>();
+	   q.add(root);
+	   boolean flag=true;
+	   while(!q.isEmpty())
+	   {
+	       int n=q.size();
+	       ArrayList<Integer> ans=new ArrayList<>();
+	       for(int i=1; i<=n; i++)
+	       {
+	          Node ele=q.remove();
+	          ans.add(ele.data);
+	          if(ele.left!=null)
+	          q.add(ele.left);
+	          if(ele.right!=null)
+	          q.add(ele.right);
+	       }
+	       if(!flag)
+	       Collections.reverse(ans);
+	       flag=!flag;
+	       result.addAll(ans);
+	   }
+	   return result;
 	}
 }
