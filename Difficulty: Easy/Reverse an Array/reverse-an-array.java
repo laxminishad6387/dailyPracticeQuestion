@@ -28,17 +28,12 @@ public class Main {
 
 class Solution {
     public void reverseArray(int arr[]) {
-      
-        
-        int i=0;
-        int j=arr.length-1;
-        while(i<j)
-        {
-            int temp=arr[i];
-            arr[i]=arr[j];
-            arr[j]=temp;
-            j--;
-            i++;
-        }
+       for(int i=0; i<arr.length/2; i++)
+       {
+           int temp=arr[i];
+           arr[i]=arr[arr.length-1-i];
+           arr[arr.length-1-i]=temp;
+           
+       }
     }
 }
