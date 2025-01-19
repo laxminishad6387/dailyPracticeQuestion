@@ -43,51 +43,57 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-  static void rotateArr(int arr[], int d) {
-      ArrayList<Integer> newarr=new ArrayList<>();
-    //   d is less  than array length
-    if(d<arr.length)
-    {
+   static void rotateArr(int arr[], int d) {
+       if(arr.length==1)
+         return;
+    //  case 1
+      if(d==arr.length)
+       return;
+    //   case 2
+       else if(d<arr.length)
+       {
+           int temp[]=new int [d];
+           for(int i=0; i<d; i++)
+           {
+               temp[i]=arr[i];
+           }
+           int curr=0;
+           for(int i=d; i<arr.length; i++)
+           {
+              arr[curr]=arr[i];
+              curr++;
+              
+           }
+           int j=0;
+           for(int i=arr.length-d; i<arr.length; i++)
+           {
+              arr[i]=temp[j];
+              j++;
+           }
+       }
+    //   case 3
+       else if(d>arr.length)
+       {
+           d=d%arr.length;
+           int temp[]=new int [d];
+           for(int i=0; i<d; i++)
+           {
+               temp[i]=arr[i];
+           }
+           int curr=0;
+           for(int i=d; i<arr.length; i++)
+           {
+              arr[curr]=arr[i];
+              curr++;
+              
+           }
+           int j=0;
+           for(int i=arr.length-d; i<arr.length; i++)
+           {
+              arr[i]=temp[j];
+              j++;
+           }
+       }
        
-        for(int i=0; i<d; i++)
-        newarr.add(arr[i]);
-        int j=0;
-        for(int i=d; i<arr.length; i++)
-        {
-            arr[j]=arr[i];
-            j++;
-        }
-        int k=0;
-        for(int i=j; i<arr.length; i++)
-        {
-            arr[i]=newarr.get(k);
-            k++;
-        }
-        
-    }
-      
-    //   d is greater than array length
-    if(d>=arr.length)
-    {
-        int d1=d%arr.length;
-       
-        for(int i=0; i<d1; i++)
-        newarr.add(arr[i]);
-        int j=0;
-        for(int i=d1; i<arr.length; i++)
-        {
-            arr[j]=arr[i];
-            j++;
-        }
-        int k=0;
-        for(int i=j; i<arr.length; i++)
-        {
-            arr[i]=newarr.get(k);
-            k++;
-        }
-        
-    }
-    
-     
     }
 }
