@@ -41,7 +41,7 @@ class GFG {
 
 
 // User function Template for Java
-
+// gfg 160 days
 class Solution {
    static void rotateArr(int arr[], int d) {
        if(arr.length==1)
@@ -50,31 +50,9 @@ class Solution {
       if(d==arr.length)
        return;
     //   case 2
-       else if(d<arr.length)
+       else if(d<arr.length || d>arr.length)
        {
-           int temp[]=new int [d];
-           for(int i=0; i<d; i++)
-           {
-               temp[i]=arr[i];
-           }
-           int curr=0;
-           for(int i=d; i<arr.length; i++)
-           {
-              arr[curr]=arr[i];
-              curr++;
-              
-           }
-           int j=0;
-           for(int i=arr.length-d; i<arr.length; i++)
-           {
-              arr[i]=temp[j];
-              j++;
-           }
-       }
-    //   case 3
-       else if(d>arr.length)
-       {
-           d=d%arr.length;
+             d=d%arr.length;
            int temp[]=new int [d];
            for(int i=0; i<d; i++)
            {
@@ -95,5 +73,9 @@ class Solution {
            }
        }
        
-    }
+   }
 }
+
+
+
+
