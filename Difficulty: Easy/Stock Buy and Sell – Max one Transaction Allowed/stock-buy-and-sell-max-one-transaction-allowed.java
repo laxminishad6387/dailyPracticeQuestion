@@ -29,20 +29,28 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-    public int maximumProfit(int nums[]) {
-        int maxProfit=0;
-        int minValue=nums[0];
-        int j=0;
-       for(int i=1; i<nums.length; i++)
-       {
-           if(nums[i]>minValue)
-             maxProfit=Math.max(maxProfit,nums[i]-nums[j]);
-            if(nums[i]<minValue)
-            {
-                j=i;
-                minValue=nums[i];
-            }
-       }
-       return maxProfit;
+    public int maximumProfit(int arr[]) {
+        // base conditon
+      if(arr.length==1)
+         return 0;
+         int min=arr[0];
+          int maxprofit=0;
+   
+           for(int i=1; i<arr.length; i++)
+         {
+             if(arr[i]<min)
+             {
+               
+                min=arr[i];
+                
+             }
+             else 
+             {
+            
+                 maxprofit=Math.max(maxprofit,arr[i]-min);
+             }
+         }
+         
+         return maxprofit;
     }
 }
