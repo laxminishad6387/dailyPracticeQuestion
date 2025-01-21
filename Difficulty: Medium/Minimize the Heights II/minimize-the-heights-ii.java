@@ -26,6 +26,7 @@ public class Main {
 
             int ans = new Solution().getMinDiff(arr, k);
             System.out.println(ans);
+            System.out.println("~");
         }
     }
 }
@@ -33,34 +34,24 @@ public class Main {
 // } Driver Code Ends
 
 
-
-
-
-
 // User function Template for Java
 
 class Solution {
     int getMinDiff(int[] arr, int k) {
-         // Step 1: Sort the array
-         int n=arr.length;
+       if(arr.length==1)
+        return 0;
         Arrays.sort(arr);
-        
-        // Step 2: Initialize the result with the difference of the tallest and shortest tower before modification
-        int result = arr[n - 1] - arr[0];
-        
-        // Step 3: Traverse the sorted array
-        for (int i = 1; i < n; i++) {
-            // If decreasing the height by k makes it negative, skip this case
-            if (arr[i] - k < 0) continue;
-            
-            // Calculate the possible minimum and maximum heights
-            int minHeight = Math.min(arr[0] + k, arr[i] - k);
-            int maxHeight = Math.max(arr[n - 1] - k, arr[i - 1] + k);
-            
-            // Update the result with the minimum difference
-            result = Math.min(result, maxHeight - minHeight);
+        int diff=arr[arr.length-1]-arr[0];
+        int max; 
+        int min;
+        for(int i=1; i<arr.length; i++)
+        {
+            if(arr[i]-k<0)
+            continue;
+            max=Math.max(arr[i-1]+k,arr[arr.length-1]-k);
+            min=Math.min(arr[0]+k,arr[i]-k);
+            diff=Math.min(diff,max-min);
         }
-        
-        return result;
+        return diff;
     }
 }
