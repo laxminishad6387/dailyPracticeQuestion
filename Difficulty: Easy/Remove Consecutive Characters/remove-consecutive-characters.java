@@ -29,17 +29,21 @@ class GFG {
 
 // User function Template for Java
 
+
 class Solution {
     public String removeConsecutiveCharacter(String s) {
-     StringBuilder result = new StringBuilder();
-        result.append(s.charAt(0));
-      for(int i=1; i<s.length(); i++)
-      {
-         if(s.charAt(i)!=s.charAt(i-1))
-         result=result.append(s.charAt(i));
+     StringBuilder str=new StringBuilder();
+      char samp=s.charAt(0);
+       for(int i=1; i<s.length(); i++)
+       {
           
-      }
-     
-       return result.toString();
+         if(s.charAt(i)!=samp)
+         {
+            str=str.append(samp);
+             samp=s.charAt(i);
+         }
+       }
+      str=str.append(samp);
+       return str.toString();
     }
 }
