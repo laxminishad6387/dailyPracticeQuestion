@@ -123,23 +123,23 @@ class Node
 
 class Tree {
     public ArrayList<Integer> reverseLevelOrder(Node root) {
-       ArrayList<Integer>  ans=new ArrayList<>();
+       ArrayList<Integer> ans=new ArrayList<>();
        Queue<Node> q=new LinkedList<>();
-        q.add(root);
-        while(!q.isEmpty())
-        {
-            int n=q.size();
-            for(int i=0; i<n; i++)
-            {
-                Node ele=q.remove();
-                ans.add(ele.data);
-                if(ele.right!=null)
-                 q.add(ele.right);
-                  if(ele.left!=null)
-                  q.add(ele.left);;
-            }
-        }
-         Collections.reverse(ans);
-        return ans;
+       q.add(root);
+       while(!q.isEmpty())
+       {
+           int n=q.size();
+           for(int i=0; i<n; i++)
+           {
+               Node ele=q.remove();
+               ans.add(ele.data);
+               if(ele.right!=null)
+               q.add(ele.right);
+               if(ele.left!=null)
+               q.add(ele.left);
+           }
+       }
+       Collections.reverse(ans);
+       return ans;
     }
 }
