@@ -107,12 +107,24 @@ class GFG {
 
 
 
-// BINARY TREE
-// BREATH FIRST SEARCH
+/*
+class Node
+{
+    int data;
+    Node left, right;
+
+    Node(int item)
+    {
+        data = item;
+        left = right = null;
+    }
+}
+*/
+
 class Tree {
     public ArrayList<Integer> reverseLevelOrder(Node root) {
-       Queue<Node> q=new LinkedList<>();
-       ArrayList<Integer>ans=new ArrayList<>();
+       ArrayList<Integer>result=new ArrayList<>();
+       Queue<Node>q=new  LinkedList<>();
        q.add(root);
        while(!q.isEmpty())
        {
@@ -120,14 +132,14 @@ class Tree {
            for(int i=0; i<n; i++)
            {
                Node ele=q.remove();
-               ans.add(ele.data);
+               result.add(ele.data);
                if(ele.right!=null)
                q.add(ele.right);
                if(ele.left!=null)
                q.add(ele.left);
            }
        }
-       Collections.reverse(ans);
-       return ans;
+       Collections.reverse(result);
+       return result;
     }
 }
