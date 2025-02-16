@@ -101,59 +101,41 @@ class Is_Leaves_At_Same_Level {
 // } Driver Code Ends
 
 
-// User function Template for Java
-
-/* A Binary Tree node
-class Node
-{
-    int data;
-    Node left, right;
-
-    Node(int item)
-    {
-        data = item;
-        left = right = null;
-    }
-}
-*/
 
 class Solution {
-    int convert(Node root)
-    {
-        if(root==null)
-       return 0;
-       return 1+Math.max(convert(root.left),convert(root.right));
-    }
     boolean check(Node root) {
-     int height=convert(root);
-    //  System.out.print(height +" ");
-     int leaves=(int)Math.pow(2,height-1);
-     Queue<Node > q=new LinkedList<>();
-     ArrayList<Integer> ans=new ArrayList<>();
-     q.add(root);
-     int count=0;
-     while(!q.isEmpty())
-     {
-         count+=1;
-         int n=q.size();
-         for(int i=0; i<n;i++)
-         {
-             Node ele=q.remove();
-             if(count!=height && ele.left==null && ele.right==null)
-             {
-                 return false;
-             }
-             if(ele.left!=null)
-             q.add(ele.left);
-             if(ele.right!=null)
-             q.add(ele.right);
-             if(count==height)
-             ans.add(ele.data);
-         }
-     }
-         return true;
-     
-       
-        
+       Queue<Node> q=new LinkedList<>();
+       int leaflevel=-1;
+       int level=0;
+       boolean leaf=false;
+       q.add(root);
+       while(!q.isEmpty())
+       {
+           int n=q.size();
+           level++;
+           for(int i=0; i<n; i++)
+           {
+               Node ele=q.remove();
+            //   case 1: here we check that all leaf are in same level or not
+               if(ele.left==null && ele.right==null)
+               {
+                   if(leaf==false)
+                   {
+                       leaf=true;
+                       leaflevel=level;
+                   }
+                   else if(leaf==true && level!=leaflevel)
+                    return false;
+               }
+               else {
+                   if(ele.left!=null)
+                    q.add(ele.left);
+                    if(ele.right!=null)
+                     q.add(ele.right);
+               }
+           }
+           
+       }
+       return true;
     }
 }
