@@ -110,42 +110,34 @@ class GfG {
 // } Driver Code Ends
 
 
-// User function Template for Java
 
-/* A Binary Tree node
-class Node
-{
-    int data;
-    Node left, right;
 
-    Node(int item)
-    {
-        data = item;
-        left = right = null;
-    }
-}*/
 class Solution {
-    // Function to return list containing elements of left view of binary tree.
     ArrayList<Integer> leftView(Node root) {
-       ArrayList<Integer>ans=new ArrayList<>();
-       if(root==null)
-        return ans;
-        Queue<Node> q=new LinkedList<>();
-        q.add(root);
-        while(!q.isEmpty())
-        {
-            int n=q.size();
-            for(int i=1; i<=n; i++)
-            {
-               Node ele=q.remove();
-               if(i==1)
-              ans.add(ele.data);
+        if(root==null)
+         return new ArrayList<>();
+        ArrayList<Integer> result=new ArrayList<>();
+     Queue<Node>q=new LinkedList<>();
+     q.add(root);
+     while(!q.isEmpty())
+     {
+         int n=q.size();
+         int count=0;
+         for(int i=0; i<n; i++)
+         {
+             Node ele=q.remove();
+         
+             if(count==0){
+              result.add(ele.data);
+             
+             }
+              count++;
               if(ele.left!=null)
-              q.add(ele.left);
-              if(ele.right!=null)
-              q.add(ele.right);
-            }
-        }
-        return ans;
+               q.add(ele.left);
+               if(ele.right!=null)
+               q.add(ele.right);
+         }
+     }
+     return result;
     }
 }
