@@ -109,47 +109,29 @@ System.out.println("~");
 // } Driver Code Ends
 
 
-// User function Template for Java
 
-/*Complete The Function Provided
-Given Below is The Node Of Tree
-class Node
-{
-    int data;
-    Node left, right;
-    public Node(int data)
-    {
-        this.data = data;
-         left = right = null;
-    }
-}*/
 
 class Solution {
-    // Function to return list containing elements of right view of binary tree.
-    ArrayList<Integer> ans=new ArrayList<>();
     ArrayList<Integer> rightView(Node root) {
-       if(root==null)
-       return ans;
-       Queue<Node> q=new LinkedList<>();
-       q.add(root);
-       while(!q.isEmpty())
+   ArrayList<Integer> result=new ArrayList<>();
+   Queue<Node> q=new LinkedList<>();
+   q.add(root);
+   while(!q.isEmpty())
+   {
+       int  n=q.size();
+       int count=1;
+       for(int i=0; i<n; i++)
        {
-            int n=q.size();
-          
-          
-           for(int i=1; i<=n; i++)
-           {
-                Node ele=q.remove();
-               if(i==n)
-               {
-               ans.add(ele.data);
-               }
-               if(ele.left!=null)
-                q.add(ele.left);
-                if(ele.right!=null)
-                q.add(ele.right);
-           }
+           Node ele=q.remove();
+           if(count==n)
+           result.add(ele.data);
+           count++;
+           if(ele.left!=null)
+           q.add(ele.left);
+           if(ele.right!=null)
+           q.add(ele.right);
        }
-       return ans;
+   }
+   return result;
     }
 }
