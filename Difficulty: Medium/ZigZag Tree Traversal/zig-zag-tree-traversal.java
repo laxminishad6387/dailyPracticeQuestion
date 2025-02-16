@@ -110,46 +110,31 @@ System.out.println("~");
 // } Driver Code Ends
 
 
-//User function Template for Java
-
-/*class Node
-{
-    int data;
-    Node left,right;
-    Node(int d)
-    {
-        data=d;
-        left=right=null;
-    }
-}*/
 
 class GFG
 {
-    //Function to store the zig zag order traversal of tree in a list.
-    ArrayList<Integer> result=new ArrayList<>();
-	ArrayList<Integer> zigZagTraversal(Node root)
+ ArrayList<Integer> zigZagTraversal(Node root)
 	{
-	   if(root==null)
-	   return result;
+	   ArrayList<Integer> result=new ArrayList<>();
 	   Queue<Node> q=new LinkedList<>();
 	   q.add(root);
-	   boolean flag=true;
+	    int count=-1;
 	   while(!q.isEmpty())
 	   {
 	       int n=q.size();
 	       ArrayList<Integer> ans=new ArrayList<>();
-	       for(int i=1; i<=n; i++)
+	      count++;
+	       for(int i=0; i<n; i++)
 	       {
-	          Node ele=q.remove();
-	          ans.add(ele.data);
-	          if(ele.left!=null)
-	          q.add(ele.left);
-	          if(ele.right!=null)
-	          q.add(ele.right);
+	           Node ele=q.remove();
+	           ans.add(ele.data);
+	           if(ele.left!=null)
+	            q.add(ele.left);
+	            if(ele.right!=null)
+	            q.add(ele.right);
 	       }
-	       if(!flag)
+	       if(count%2!=0)
 	       Collections.reverse(ans);
-	       flag=!flag;
 	       result.addAll(ans);
 	   }
 	   return result;
