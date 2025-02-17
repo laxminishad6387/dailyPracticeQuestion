@@ -131,13 +131,14 @@ class Solution{
     {
         if(root==null)
         return 0;
-        int leftSum=convert(root.left);
-        int rightSum=convert(root.right);
-        int originalData=root.data;
-        root.data=leftSum+rightSum;
-        return root.data+originalData;
+        int left=convert(root.left);
+        int right=convert(root.right);
+        int data=root.data;
+        root.data=left+right;
+        return data+left+right;
     }
     public void toSumTree(Node root){
-        convert(root);
+      convert(root);
+      return ;
     }
 }
