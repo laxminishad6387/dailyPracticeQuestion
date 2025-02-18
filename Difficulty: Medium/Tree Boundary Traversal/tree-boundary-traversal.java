@@ -85,49 +85,34 @@ class GFG {
 // } Driver Code Ends
 
 
-// User function Template for Java
-/*
-class Node
-{
-    int data;
-    Node left, right;
-
-    public Node(int d)
-    {
-        data = d;
-        left = right = null;
-    }
-}
-*/
-
 class Solution {
-    ArrayList<Integer> boundaryTraversal(Node node) {
+    ArrayList<Integer> boundaryTraversal(Node root) {
         ArrayList<Integer> result = new ArrayList<>();
-        if (node == null) return result;
+        if (root == null) return result;
 
         // Add root (if not leaf)
-        if (!isLeaf(node)) {
-            result.add(node.data);
+        if (!isLeaf(root)) {
+            result.add(root.data);
         }
 
         // Add left boundary (excluding leaves)
-        addLeftBoundary(node.left, result);
+        addLeftBoundary(root.left, result);
 
         // Add leaf nodes (from both left and right subtrees)
-        addLeaves(node, result);
+        addLeaves(root, result);
 
         // Add right boundary (excluding leaves) in reverse order
-        addRightBoundary(node.right, result);
+        addRightBoundary(root.right, result);
 
         return result;
     }
 
-    private boolean isLeaf(Node node) {
-        return (node.left == null && node.right == null);
+    private boolean isLeaf(Node root) {
+        return (root.left == null && root.right == null);
     }
 
-    private void addLeftBoundary(Node node, ArrayList<Integer> result) {
-        Node curr = node;
+    private void addLeftBoundary(Node root, ArrayList<Integer> result) {
+        Node curr = root;
         while (curr != null) {
             if (!isLeaf(curr)) {
                 result.add(curr.data);
@@ -136,19 +121,19 @@ class Solution {
         }
     }
 
-    private void addLeaves(Node node, ArrayList<Integer> result) {
-        if (node == null) return;
+    private void addLeaves(Node root, ArrayList<Integer> result) {
+        if (root == null) return;
 
-        if (isLeaf(node)) {
-            result.add(node.data);
+        if (isLeaf(root)) {
+            result.add(root.data);
         }
-        addLeaves(node.left, result);
-        addLeaves(node.right, result);
+        addLeaves(root.left, result);
+        addLeaves(root.right, result);
     }
 
-    private void addRightBoundary(Node node, ArrayList<Integer> result) {
+    private void addRightBoundary(Node root, ArrayList<Integer> result) {
         Stack<Integer> stack = new Stack<>();
-        Node curr = node;
+        Node curr = root;
         while (curr != null) {
             if (!isLeaf(curr)) {
                 stack.push(curr.data);
