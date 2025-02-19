@@ -24,48 +24,54 @@ class gfg {
 // } Driver Code Ends
 
 
+
 class Solution {
-    public int maximumPath(int[][] arr) {
-     int m=arr.length; //number of rows
-     int n=arr[0].length; // number of columns
-     int ans[][]=new int[m][n];  //create another matrix
-     for(int i=0; i<m; i++)
-     {
-         for(int j=0; j<n; j++)
-          ans[i][j]=arr[i][j];
-     }
-     for(int i=0; i<m; i++)
-     {
-        for(int j=0; j<n; j++)
-        {
-            if(j>0  && i<m-1)  //handle left diagonal //arr[i+1][j-1]
-            {
-                int sum=ans[i][j]+arr[i+1][j-1];
-                if(sum>ans[i+1][j-1])
-                  ans[i+1][j-1]=sum;
-            }
-           
-            if(i<m-1)//handle down pointer  //arr[i+1][j]
-            {
-                int sum=ans[i][j]+arr[i+1][j];
-                if(sum>ans[i+1][j])
-                  ans[i+1][j]=sum;
-            }
-            if(j<n-1 && i<m-1)//handle right diagonal //arr[i+1][j+1]
-            {
-                int sum=ans[i][j]+arr[i+1][j+1];
-                if(sum>ans[i+1][j+1])
-                  ans[i+1][j+1]=sum;
-            }
-            
-        }
-     }
-     int max=ans[m-1][0];
-      for(int i=1; i<n; i++)
-      {
-          if(ans[m-1][i]>max)
-         max=ans[m-1][i];
-      }
-      return max;
+    // down move
+    void downmove(int row, int col,int [][]mat, int [][]newmat)
+    {
+    newmat[row+1][col]=Math.max(newmat[row+1][col],newmat[row][col]+mat[row+1][col]);
+    return;
+    }
+    // move right diagonal
+    void rightdiagonalmove(int row,int col,int [][]mat,int [][]newmat)
+    {
+    newmat[row+1][col+1]=Math.max(newmat[row+1][col+1],newmat[row][col]+mat[row+1][col+1]);
+      return;
+    }
+    // move left diagonal
+    void leftdiagonalmove(int row,int col,int [][]mat,int [][]newmat)
+    {
+     newmat[row+1][col-1]=Math.max(newmat[row+1][col-1],newmat[row][col]+mat[row+1][col-1]);
+      return ;
+    }
+    
+    
+    public int maximumPath(int[][] mat) {
+        int n=mat.length; //number of rows
+        int m=mat[0].length; //number of columns
+      int newmat[][]=new int[n][m];
+      
+      for(int i=0; i<m; i++)
+        newmat[0][i]=mat[0][i]; 
+        
+       for(int i=0; i<n-1; i++)
+       {
+           for(int j=0; j<m; j++)
+           {    
+                if(j>0 )
+                  leftdiagonalmove(i,j,mat,newmat);
+                  downmove(i, j,mat, newmat);
+               if(j<m-1) //check row index, col index, roe last index
+                 rightdiagonalmove(i,j,mat,newmat);
+                  
+                 
+           }
+       }
+        int max = newmat[n - 1][0];
+        for (int i = 1; i < m; i++)
+            max = Math.max(max, newmat[n - 1][i]);
+            return max;
+       
+      
     }
 }
