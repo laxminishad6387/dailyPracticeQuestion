@@ -19,22 +19,20 @@ public class Main {
 
 // } Driver Code Ends
 
-// solve using dp approch 
 
+// User-defined Solution class
 
 class Solution {
-    int MOD=100000007;
     public int countBT(int h) {
-       if(h<=1)
-         return h;
-         int dp[]=new int[h+1];
-         dp[0] = 1;
-        dp[1] = 1;
-         
-        for(int i = 2; i <= h; ++i) 
-            dp[i] = (dp[i - 1] * ((2 * dp [i - 2])% MOD + dp[i - 1]) % MOD) % MOD;
-             
-            return dp[h];
-       
+       if(h==1)
+       return 1;
+       if(h==2)
+       return 3;
+       int dp[]=new int[h+1];
+       dp[0]=1;
+       dp[1]=3;
+       for(int i=2; i<h; i++)
+         dp[i]=dp[i-1]*dp[i-1]+2*dp[i-1]*dp[i-2];  
+       return dp[h-1];
     }
 }
