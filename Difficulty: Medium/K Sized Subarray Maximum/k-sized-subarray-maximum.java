@@ -28,7 +28,7 @@ public class Main {
             int idx = 0;
             for (int i : array) arr[idx++] = i;
             int k = Integer.parseInt(br.readLine());
-            ArrayList<Integer> res = new Solution().max_of_subarrays(arr, k);
+            ArrayList<Integer> res = new Solution().maxOfSubarrays(arr, k);
 
             // printing the elements of the ArrayList
             for (int i = 0; i < res.size(); i++) System.out.print(res.get(i) + " ");
@@ -40,37 +40,30 @@ public class Main {
 // } Driver Code Ends
 
 
-// User function template for JAVA
-
 
 
 class Solution {
-    // Function to find maximum of each subarray of size k.
-    public ArrayList<Integer> max_of_subarrays(int arr[], int k) {
-        // Result to store maximums of each subarray
+    public ArrayList<Integer> maxOfSubarrays(int arr[], int k) {
         ArrayList<Integer> result = new ArrayList<>();
-        
-        // Deque to store indices of array elements
         Deque<Integer> deque = new LinkedList<>();
         
-        // Process each element in the array
         for (int i = 0; i < arr.length; i++) {
-            // Remove indices that are out of the current window
-            if (!deque.isEmpty() && deque.peekFirst() <= i - k) {
-                deque.pollFirst();
+            // Remove elements from front if they are out of the current window
+            if (!deque.isEmpty() && deque.peek() < i - k + 1) {
+                deque.poll();
             }
             
-            // Remove indices of elements that are smaller than the current element
+            // Remove elements smaller than the current one from the back
             while (!deque.isEmpty() && arr[deque.peekLast()] <= arr[i]) {
                 deque.pollLast();
             }
             
-            // Add current element index to deque
-            deque.addLast(i);
+            // Add current index to deque
+            deque.offer(i);
             
-            // Add the maximum of the current window to the result (from deque's front)
+            // Start adding maximums to result when we reach the window size
             if (i >= k - 1) {
-                result.add(arr[deque.peekFirst()]);
+                result.add(arr[deque.peek()]);
             }
         }
         
