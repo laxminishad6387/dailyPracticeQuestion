@@ -33,7 +33,7 @@ class Solution {
        for(int i=0; i<arr.length; i++)
        {
            if(arr[i]>firstmax){
-               secondmax=firstmax;
+             
                firstmax=arr[i];
                         
            }
