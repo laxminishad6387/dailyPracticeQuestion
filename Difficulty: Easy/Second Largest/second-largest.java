@@ -25,16 +25,22 @@ public class Main {
 
 
 // User function Template for Java
-// gfg
 
 class Solution {
     public int getSecondLargest(int[] arr) {
-      Arrays.sort(arr);
-      for(int  i=arr.length-1; i>0; i--)
-      {
-          if(arr[i]!=arr[i-1])
-            return arr[i-1];
-      }
-      return -1;
+       int firstmax=Integer.MIN_VALUE;
+       int secondmax=Integer.MIN_VALUE;
+       for(int i=0; i<arr.length; i++)
+       {
+           if(arr[i]>firstmax){
+               secondmax=firstmax;
+               firstmax=arr[i];
+                        
+           }
+           else if(arr[i]>secondmax && arr[i]<firstmax)secondmax=arr[i];
+       }
+       if(secondmax<0)
+       return -1;
+       return secondmax;
     }
 }
