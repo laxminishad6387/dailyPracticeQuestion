@@ -45,26 +45,24 @@ class GFG {
 
 // User function Template for Java
 class Solution {
-    // Function to return Breadth First Traversal of given graph.
-    public ArrayList<Integer> bfsOfGraph(int v, ArrayList<ArrayList<Integer>> graph) {
-       ArrayList<Integer> result=new ArrayList<>();
-       Queue<Integer> q=new LinkedList<>();
-       boolean  vis[]=new boolean[v];
-       q.add(0);
-       while(!q.isEmpty())
-       {
-           int curr=q.remove();
-           if(vis[curr]==false)
-           {
+   public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        ArrayList<Integer> result=new ArrayList<>();
+        Queue<Integer> q=new LinkedList<>();
+        boolean vis[]=new boolean[V];
+        q.add(0);
+        while(!q.isEmpty())
+        {
+            int curr=q.remove();
+            if(vis[curr]==false)
+            {
                result.add(curr);
                vis[curr]=true;
-               for(int i=0; i<graph.get(curr).size();i++)
+               for(int i=0; i<adj.get(curr).size(); i++)
                {
-                   int nebig=graph.get(curr).get(i);
-                   q.add(nebig);
+                   q.add(adj.get(curr).get(i));
                }
-           }
-       }
-       return result;
+            }
+        }
+        return result;
     }
 }
