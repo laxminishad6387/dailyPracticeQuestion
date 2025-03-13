@@ -9,44 +9,55 @@ import java.util.Queue;
 
 // } Driver Code Ends
 
+// User function Template for Java
 
-class Solution {
-    static ArrayList<Integer> topView(Node root) {
-        if (root == null) return new ArrayList<>();
-
-        Queue<Pair> q = new ArrayDeque<>();
-        Map<Integer, Integer> map = new TreeMap<>();
-        q.add(new Pair(0, root));
-
-        while (!q.isEmpty()) {
-            Pair curr = q.poll();
-            if (!map.containsKey(curr.hd)) {
-                map.put(curr.hd, curr.node.data);
-            }
-            if (curr.node.left != null) {
-                q.add(new Pair(curr.hd - 1, curr.node.left));
-            }
-            if (curr.node.right != null) {
-                q.add(new Pair(curr.hd + 1, curr.node.right));
-            }
-        }
-
-        ArrayList<Integer> result = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            result.add(entry.getValue());
-        }
-        return result;
-    }
-
-    static class Pair {
-        int hd;
-        Node node;
-        public Pair(int hd, Node node) {
-            this.hd = hd;
-            this.node = node;
-        }
+/*
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int data){
+        this.data = data;
+        left=null;
+        right=null;
     }
 }
+*/
+
+class Solution {
+    static class Pair{
+           int nodeIndex;
+          Node root;
+           Pair(int nodeIndex,Node  root)
+          {
+              this.nodeIndex=nodeIndex;
+              this.root=root;
+          }
+       }
+    
+    static ArrayList<Integer> topView(Node root) {
+       if(root==null)return new ArrayList<>();
+       ArrayList<Integer> result=new ArrayList<>();
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+       Queue<Pair>q=new LinkedList<>();
+       q.add(new Pair(0,root));
+       while(!q.isEmpty())
+       {
+          Pair currNode=q.poll();
+          if(!map.containsKey(currNode.nodeIndex))
+          map.put(currNode.nodeIndex, currNode.root.data);
+          if(currNode.root.left!=null)
+          q.add(new Pair(currNode.nodeIndex-1,currNode.root.left));
+           if(currNode.root.right!=null)
+          q.add(new Pair(currNode.nodeIndex+1,currNode.root.right));
+       }
+       for(Map.Entry<Integer, Integer> entry:map.entrySet())
+       result.add(entry.getValue());
+       
+      return result;
+    }
+}
+
 
 //{ Driver Code Starts.
 
