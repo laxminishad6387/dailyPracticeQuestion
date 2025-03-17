@@ -35,33 +35,35 @@ class GFG {
 
 
 class Solution {
-    
-    public boolean  cycleDetection(ArrayList<ArrayList<Integer>>arr,boolean []vis,int curr,int parent){
-        vis[curr]=true;
-        for(int i=0; i<arr.get(curr).size(); i++)
-        {
-            int nei=arr.get(curr).get(i);
-            if(parent!=nei && vis[nei]==true)
-              return true;
-            if(vis[nei]==false)
-            {
-             if( cycleDetection(arr,vis,nei,curr))
+   boolean  isPresent(ArrayList<ArrayList<Integer>>adj,int currNode,int parent,boolean []vis){
+       vis[currNode]=true;
+       for(int i=0; i<adj.get(currNode).size(); i++)
+       {
+           int nebNode=adj.get(currNode).get(i);
+        //   case 1
+            if(vis[nebNode]==true && nebNode!=parent){
+                return true;
+            }
+            // case 2
+            else if(vis[nebNode]==false){
+                if( isPresent(adj,nebNode,currNode,vis))
+                return true;
+            }
+       }
+       return false;
+   }
+    public boolean isCycle(ArrayList<ArrayList<Integer>> adj) {
+       boolean vis[]=new boolean[adj.size()];
+       int parent=-1;
+       for(int i=0; i<adj.size(); i++){
+           if(vis[i]==false){
+               if(isPresent(adj,i,parent,vis))
                return true;
-            }
-        }
-        return false;
-    }
-    public boolean isCycle(ArrayList<ArrayList<Integer>> arr) {
-        boolean vis[]=new boolean[arr.size()];
-        for(int i=0; i<arr.size(); i++)
-        {
-            if(vis[i]==false)
-            { 
-                if(cycleDetection(arr,vis,i,-1))
-                  return true;
-            }
-        }
-        return false;
+           }
+       }
+       return false;
       
+       
     }
 }
+
