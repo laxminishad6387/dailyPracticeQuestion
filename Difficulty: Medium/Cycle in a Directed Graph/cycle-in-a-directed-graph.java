@@ -18,7 +18,7 @@ class DriverClass {
                 int v = sc.nextInt();
                 list.get(u).add(v);
             }
-            if (new Solution().isCyclic(V, list) == true)
+            if (new Solution().isCyclic(list) == true)
                 System.out.println("1");
             else
                 System.out.println("0");
@@ -33,36 +33,31 @@ class DriverClass {
 /*Complete the function below*/
 
 class Solution {
-   
-    // DFS
-    public boolean isCycleDetection(ArrayList<ArrayList<Integer>>arr,boolean []vis,
-    int curr,boolean []rec){
-       vis[curr]=true;
-       rec[curr]=true;
-       for(int i=0; i<arr.get(curr).size(); i++)
-       {
-           int nei=arr.get(curr).get(i);
-            if(rec[nei]==true)
-             return true;
-             if(vis[nei]==false)
-             {
-                if( isCycleDetection(arr,vis,nei,rec))
-                   return true;
-             }
-       }
-       rec[curr]=false;
-       return false;
-    }
-    public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> arr) {
-        boolean vis[]=new boolean[V];
-        boolean rec[]=new boolean[V];
-        for (int i = 0; i < V; i++) {
-            if (!vis[i]) {
-                if (isCycleDetection(arr, vis, i, rec)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+     
+     boolean isPresent(ArrayList<ArrayList<Integer>>adj,int currNode,boolean []vis,boolean []rec){
+         vis[currNode]=true;
+         rec[currNode]=true;
+         for(int i=0; i<adj.get(currNode).size(); i++){
+             int nebNode=adj.get(currNode).get(i);
+             if(rec[nebNode]==true)
+              return true;
+              else if(vis[nebNode]==false){
+                 if(isPresent(adj,nebNode,vis,rec))
+                 return true;
+               
+              }
+         }
+         rec[currNode]=false;
+         return false;
+     }
+    public boolean isCyclic(ArrayList<ArrayList<Integer>> adj) {
+      boolean vis[]=new boolean[adj.size()];
+      boolean rec[]=new boolean[adj.size()];
+      for(int i=0; i<adj.size(); i++){
+          if(vis[i]==false)
+         if( isPresent(adj,i,vis,rec))
+         return true;
+      }
+      return false;
     }
 }
