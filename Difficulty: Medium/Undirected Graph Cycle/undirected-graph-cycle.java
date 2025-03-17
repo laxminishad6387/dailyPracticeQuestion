@@ -36,36 +36,69 @@ class GFG {
 
 class Solution {
     
-    boolean present(ArrayList<ArrayList<Integer>>adj,int start,boolean []vis){
-        Queue<int[]> q=new LinkedList<>();
-        q.add(new int[]{start, -1});
-        vis[start]=true;
-    while(!q.isEmpty()){
-        int []node=q.remove();
-        int currNode=node[0];
-        int parentNode=node[1];
+    // undirected graph  by using dfs
+    
+    boolean isPresent(ArrayList<ArrayList<Integer>> adj,int  currNode ,int parentNode,boolean []vis){
+        vis[currNode]=true;
         for(int i=0; i<adj.get(currNode).size(); i++){
             int nebNode=adj.get(currNode).get(i);
-            if(vis[nebNode]==false){
-                q.add(new int[]{nebNode,currNode});
-                vis[nebNode]=true;
-            }
-            else if(vis[nebNode]==true && nebNode!=parentNode)
+            if(vis[nebNode]==true && nebNode!=parentNode)
             return true;
+            else if(vis[nebNode]==false){
+                if(isPresent(adj,nebNode,currNode,vis))
+                {
+                    return true;
+                }
+            }
         }
+        return false;
     }
-    return false;
+    public boolean isCycle(ArrayList<ArrayList<Integer>> adj) {
+        boolean vis[]=new boolean[adj.size()];
+        for(int i=0; i<adj.size(); i++){
+            if(vis[i]==false)
+            {
+                if(isPresent(adj,i,-1,vis))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-  public boolean isCycle(ArrayList<ArrayList<Integer>> adj) {
-      boolean []vis=new boolean[adj.size()];
-      for(int i=0;i<adj.size(); i++){
-          if(vis[i]==false)
-          {
-              if(present(adj,i,vis))
-              return true;
-          }
-      }
-      return false;
-    }
+    
+    // undirected graph cycle by using bfs
+    
+//     boolean present(ArrayList<ArrayList<Integer>>adj,int start,boolean []vis){
+//         Queue<int[]> q=new LinkedList<>();
+//         q.add(new int[]{start, -1});
+//         vis[start]=true;
+//     while(!q.isEmpty()){
+//         int []node=q.remove();
+//         int currNode=node[0];
+//         int parentNode=node[1];
+//         for(int i=0; i<adj.get(currNode).size(); i++){
+//             int nebNode=adj.get(currNode).get(i);
+//             if(vis[nebNode]==false){
+//                 q.add(new int[]{nebNode,currNode});
+//                 vis[nebNode]=true;
+//             }
+//             else if(vis[nebNode]==true && nebNode!=parentNode)
+//             return true;
+//         }
+//     }
+//     return false;
+//     }
+//   public boolean isCycle(ArrayList<ArrayList<Integer>> adj) {
+//       boolean []vis=new boolean[adj.size()];
+//       for(int i=0;i<adj.size(); i++){
+//           if(vis[i]==false)
+//           {
+//               if(present(adj,i,vis))
+//               return true;
+//           }
+//       }
+//       return false;
+//     }
 }
 
