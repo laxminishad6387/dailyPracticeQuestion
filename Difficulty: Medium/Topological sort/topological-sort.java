@@ -55,32 +55,28 @@ class Main {
 
 
 class Solution {
-    // Function to return list containing vertices in Topological order.
-   static void topologicalSort(ArrayList<ArrayList<Integer>> arr, int curr, boolean []vis , Stack<Integer> stack)
-    {
-      vis[curr]=true;
-      
-      for(int i=0; i<arr.get(curr).size(); i++)
-      {
-          int current=arr.get(curr).get(i);
-          if(vis[current]==false)
-           topologicalSort(arr,current, vis,stack);
-      }
-      stack.push(curr);
-      return;
+    
+    static void topo(ArrayList<ArrayList<Integer>> adj, int currNode, boolean vis[],Stack<Integer> stack){
+        vis[currNode]=true;
+        for(int i=0; i<adj.get(currNode).size(); i++){
+            int nebNode=adj.get(currNode).get(i);
+            if(vis[nebNode]==false)
+             topo(adj,nebNode,vis,stack);
+        }
+        stack.push(currNode);
     }
-    static ArrayList<Integer> topologicalSort(ArrayList<ArrayList<Integer>> arr) {
-      boolean vis[]=new boolean[arr.size()];
-      Stack<Integer> stack=new Stack<>();
-      for(int i=0; i<arr.size(); i++)
-      {
-          if(vis[i]==false)
-           topologicalSort(arr,0,vis,stack);
-      }
-      ArrayList<Integer> result=new ArrayList<>();
-      while(!stack.isEmpty())
-        result.add(stack.pop());
-       return result;
-     
+    static ArrayList<Integer> topologicalSort(ArrayList<ArrayList<Integer>> adj) {
+       Stack<Integer> stack=new Stack<>();
+       boolean vis[]=new boolean[adj.size()];
+       for(int i=0; i<adj.size(); i++){
+           if(vis[i]==false)
+            topo(adj,i,vis,stack);
+           
+       }
+       ArrayList<Integer> result=new ArrayList<>();
+     while(!stack.isEmpty()){
+         result.add(stack.pop());
+     }
+     return result;
     }
 }
